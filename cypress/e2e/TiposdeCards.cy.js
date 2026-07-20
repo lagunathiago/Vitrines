@@ -23,7 +23,7 @@ describe("Teste - Login", () => {
 
   context("Criando Vitrine", { testIsolation: false }, () => {
   
-    /*
+    
     it("Vai na categoria", () => {
 
       // Clicando na Vitrine
@@ -282,7 +282,6 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'PÃ
   cy.wait(5000);
 
     });
-*/
 
 
       it('Clica em sair', () => {
