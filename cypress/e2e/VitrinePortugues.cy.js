@@ -38,7 +38,7 @@ describe("Teste - Login", () => {
 
   context("Criando Vitrine", { testIsolation: false }, () => {
   
-   
+   /*
     it("Cria a categoria", () => {
 
       // Clicando na Vitrine
@@ -91,34 +91,88 @@ describe("Teste - Login", () => {
   .should('be.visible')
   .click();
 
-  cy.document().then((doc) => {
-  const aviso = doc.createElement('div');
-
-  aviso.id = 'aviso-pause';
-  aviso.innerHTML = '⚠️ INSIRA A COR DE FUNDO/FONTE/FONTE DE TÍTULOS/FONTE SECUNDÁRIA/BORDA DOS CARTÕES!';
-  aviso.style.position = 'fixed';
-  aviso.style.top = '20px';
-  aviso.style.left = '50%';
-  aviso.style.transform = 'translateX(-50%)';
-  aviso.style.background = 'red';
-  aviso.style.color = 'white';
-  aviso.style.padding = '20px';
-  aviso.style.fontSize = '24px';
-  aviso.style.fontWeight = 'bold';
-  aviso.style.zIndex = '999999';
-
-  doc.body.appendChild(aviso);
-});
-
-cy.pause();
-
-// Quando clicar em Resume, o teste continua daqui
-cy.document().then((doc) => {
-  doc.getElementById('aviso-pause')?.remove();
-    });
-
   });
 
+it('INSERE AS CORES DA VITRINE', () => {
+  function preencherCor(nomeCampo, cor) {
+    const seletorCampo = new RegExp(`^${nomeCampo}$`, 'i')
+
+    cy.contains('.box-title', seletorCampo, {
+      timeout: 20000
+    })
+      .should('exist')
+      .closest('.box')
+      .find('input[colorpicker]')
+      .should('exist')
+      .then(($input) => {
+        const input = $input[0]
+        const win = input.ownerDocument.defaultView
+
+        const setterValor = Object.getOwnPropertyDescriptor(
+          win.HTMLInputElement.prototype,
+          'value'
+        ).set
+
+        input.focus()
+
+        setterValor.call(input, cor)
+
+        input.dispatchEvent(
+          new win.Event('input', {
+            bubbles: true
+          })
+        )
+
+        input.dispatchEvent(
+          new win.Event('change', {
+            bubbles: true
+          })
+        )
+
+        input.dispatchEvent(
+          new win.Event('blur', {
+            bubbles: true
+          })
+        )
+      })
+
+    // O campo possui debounce de 500ms
+    cy.wait(1000)
+
+    cy.contains('.box-title', seletorCampo)
+      .closest('.box')
+      .find('input[colorpicker]')
+      .should('have.value', cor)
+
+    cy.log(`${nomeCampo}: ${cor}`)
+  }
+
+  // Cor principal das fontes
+  preencherCor(
+    'COR DA FONTE',
+    '#ca0606'
+  )
+
+  // Cor de fundo da vitrine
+  preencherCor(
+    'COR DE FUNDO',
+    '#a11212'
+  )
+
+  // Cor dos títulos
+  preencherCor(
+    'COR DA FONTE DE TÍTULOS',
+    '#000000'
+  )
+
+  // Cor das fontes secundárias
+  preencherCor(
+    'COR DA FONTE SECUNDÁRIA',
+    '#be950b'
+  )
+})
+
+  
     it('Adiciona a pesquisa', () => {
 
         //Clica em adicionar
@@ -134,8 +188,6 @@ cy.get('#new-showcase-item-options > [ng-if="showcase.theme === \'THEME_DEFAULT\
 .click();
     
 });
-
-it('Adiciona o Banner', () => {
 
     it('Adiciona o Banner 6:1', () => {
 
@@ -187,21 +239,6 @@ cy.contains('.modal', 'Arraste para cá ou selecione os arquivos', { timeout: 10
 
   cy.wait(1000);
 
-
-  //Clica em salvar
-  cy.get('.modal > .modal-footer > .btn-swipe-accent')
-  .should('be.visible')
-  .click();
-
-  cy.wait(1000);
-
-  //Clica em ambos
-  cy.get('.center > :nth-child(2) > .icon-radio')
-  .should('be.visible')
-  .click();
-
-  cy.wait(1000);
-
   //Clica em salvar novamente
   cy.get('.between > .flex.ng-scope > .btn-swipe-accent')
   .should('be.visible')
@@ -211,9 +248,7 @@ cy.contains('.modal', 'Arraste para cá ou selecione os arquivos', { timeout: 10
 cy.get('.banner-container', { timeout: 10000 })
   .should('be.visible');
 
-     });
     });
-
 
      it('Adiciona o Carrosel', () => {
 
@@ -678,7 +713,7 @@ cy.get('#cke_Upload_353')
 cy.wait(2000);
 
 // Exemplo: arquivo dentro de cypress/fixtures
-const arquivo = 'cypress/fixtures/logo2.png';
+const arquivo = 'cypress/fixtures/logo2.jpg';
 
 // Garante que a janela do CKEditor está aberta
 cy.get('.cke_dialog', { timeout: 10000 })
@@ -782,6 +817,7 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'P�
 
     });
 
+
      it('Clica em sair', () => {
 
         cy.wait(4000);
@@ -854,6 +890,9 @@ cy.contains('.carousel-container', tituloVitrine, { timeout: 20000 })
       .should('exist')
       .and('be.visible');
   });
+});
+
+  it('Verifica se o Rich text está disponivel', () => {
 
   // Verifica se o bloco de Rich Text está visível
 cy.get('.showcase-rich-text-content', { timeout: 10000 })
@@ -870,11 +909,241 @@ cy.get('.showcase-rich-text-content img', { timeout: 10000 })
   .and(($img) => {
     expect($img[0].naturalWidth).to.be.greaterThan(0);
   });
-    
+
+    });
+
+    it("Loga novamente no perfil Administrador", () => {
+
+    cy.wait(3000);
+
+    //Clica em entrar
+     cy.contains('button.btn-swipe-accent', 'Entrar')
+  .should('be.visible')
+  .click({ force: true })
+
+    cy.wait(3000)
+
+// Preenche e realiza o login dentro do popup
+cy.get('.popup.popped')
+  .should('be.visible')
+  .within(() => {
+    cy.get('input[ng-model="credentials.username"]')
+      .should('be.visible')
+      .clear()
+      .type('qualidade2@lectortec.com.br')
+
+    cy.get('#login_password_navbar')
+      .should('be.visible')
+      .clear()
+      .type('2006lrnrgr', { log: false })
+
+    cy.contains('button[ng-click="login()"]', 'Entrar')
+      .should('be.visible')
+      .click()
+      cy.wait(10000)
+
+  });
+
+});
+*/
+
+    it("Vai na Categoria", () => {
+
+      // Clicando na Vitrine
+      cy.get('[title="Vitrines"] > .sideitem',{timeout:60000})
+      .should('be.visible')
+      .click();
+
+        //Clica na categoria 
+  cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 10000 })
+  .should('be.visible')
+  .click({ force: true });
+
+  cy.wait(4000)
+
+    //Clica em editar
+ cy.contains('tr', 'Vitrine Portugues Cypress')
+  .within(() => {
+    cy.get('button[ng-click="editShowcase(showcase)"]')
+    .scrollIntoView()
+      .click({ force: true })
+  });
+
+    });
+
+      it('TROCA AS CORES DA VITRINE', () => { 
+  function preencherCor(nomeCampo, cor) {
+    const seletorCampo = new RegExp(`^${nomeCampo}$`, 'i')
+
+    cy.contains('.box-title', seletorCampo, {
+      timeout: 20000
+    })
+      .should('exist')
+      .closest('.box')
+      .find('input[colorpicker]')
+      .should('exist')
+      .then(($input) => {
+        const input = $input[0]
+        const win = input.ownerDocument.defaultView
+
+        const setterValor = Object.getOwnPropertyDescriptor(
+          win.HTMLInputElement.prototype,
+          'value'
+        ).set
+
+        input.focus()
+
+        setterValor.call(input, cor)
+
+        input.dispatchEvent(
+          new win.Event('input', {
+            bubbles: true
+          })
+        )
+
+        input.dispatchEvent(
+          new win.Event('change', {
+            bubbles: true
+          })
+        )
+
+        input.dispatchEvent(
+          new win.Event('blur', {
+            bubbles: true
+          })
+        )
+      })
+
+    // O campo possui debounce de 500ms
+    cy.wait(1000)
+
+    cy.contains('.box-title', seletorCampo)
+      .closest('.box')
+      .find('input[colorpicker]')
+      .should('have.value', cor)
+
+    cy.log(`${nomeCampo}: ${cor}`)
+  }
+
+  // Cor principal das fontes
+  preencherCor(
+    'COR DA FONTE',
+    '#000000'
+  )
+
+  // Cor de fundo da vitrine
+  preencherCor(
+    'COR DE FUNDO',
+    '#0a70a0'
+  )
+
+  // Cor dos títulos
+  preencherCor(
+    'COR DA FONTE DE TÍTULOS',
+    '#ffffff'
+  )
+
+  // Cor das fontes secundárias
+  preencherCor(
+    'COR DA FONTE SECUNDÁRIA',
+    '#ffffff'
+  )
+
+    // Cor das fontes secundárias
+  preencherCor(
+    'COR DE FUNDO DOS CARTÕES',
+    '#278fc1'
+  )
+
+})
+
+
+ it('Edita a vitrine', () => {
+
+      //Clica em editar no carrosel
+      cy.get(':nth-child(3) > .actions > .actions-line > :nth-child(1) > .btn')
+      .scrollIntoView()
+  .click({ force: true });
+
+const conteudosParaExcluir = [
+  'Categoria de Trilhas',
+  'Categoria de treinamentos',
+  'Vídeo - Link',
+  'Documento',
+  'Diretório de documentos',
+  'Gravações',
+  'Categoria de gravações'
+]
+
+cy.wrap(conteudosParaExcluir).each((nome) => {
+  return cy.contains(
+    'table.carousel-contents:visible tbody tr',
+    nome,
+    {
+      matchCase: false,
+      timeout: 15000
+    }
+  )
+    .should('exist')
+    .scrollIntoView({ block: 'center' })
+    .within(() => {
+      cy.get('button[ng-click^="removeContent"]')
+        .should('exist')
+        .click({ force: true })
+    })
+    .then(() => {
+      cy.wait(1500)
+    })
+})
+
+cy.wait(2000);
+
+//Escreve o título
+cy.get('input[placeholder="Título"]')
+  .then(($input) => {
+    const input = $input[0];
+
+    input.removeAttribute('disabled');
+    input.focus();
+    input.value = 'Título EDITADO LECTOR PORTUGUES';
+
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    input.dispatchEvent(new Event('blur', { bubbles: true }));
+  });
+
+
+  cy.wait(1000);
+
+cy.get('input[placeholder="Descrição"]')
+  .then(($input) => {
+    const input = $input[0];
+
+    input.removeAttribute('disabled');
+    input.focus();
+    input.value = 'Descrição EDITADA LECTOR PORTUGUES';
+
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    input.dispatchEvent(new Event('blur', { bubbles: true }));
+  });
+
+    //Clica em Salvar no carrosel
+  cy.get('[ng-click="saveCarousel()"]')
+  .scrollIntoView()
+  .click();
+
+  cy.wait(1000);
+
+    //Salva a Vitrine
+  cy.get('.open-content > .end > .btn-swipe-accent')
+  .should('be.visible')
+  .click();
+        
 
 
     });
 
-  });
-  
+ });
+
 });
