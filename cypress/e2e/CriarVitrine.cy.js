@@ -36,9 +36,9 @@ describe("Teste - Login", () => {
 
   });
 
-  context("Criando Treinamento", { testIsolation: false }, () => {
+  context("Criando Vitrine", { testIsolation: false }, () => {
   
-    /*
+   
     it("Cria a categoria", () => {
 
       // Clicando na Vitrine
@@ -913,33 +913,41 @@ cy.get('.showcase-rich-text-content img', { timeout: 10000 })
     
   });
 
-  */
-  it("Troca pro perfil Administrador", () => {
+  
+  it("Loga novamente no perfil Administrador", () => {
 
     cy.wait(3000);
 
-     //Clioca no icon
-    cy.get('#user-options-btn > .icon-profile', {timeout: 60000})
-    .should('be.visible')
-    .click()
-
-    cy.wait(2000)
-
-    //Clica em selecionar perfil
-  cy.contains('.menu-option', 'Selecionar perfil', { timeout: 10000 })
+    //Clica em entrar
+     cy.contains('button.btn-swipe-accent', 'Entrar')
   .should('be.visible')
-  .click({ force: true });
+  .click({ force: true })
 
-      cy.wait(2000)
+    cy.wait(3000)
 
-  //Clica em Administrador
-  cy.contains('span', 'Administrador - Todos', { timeout: 10000 })
+// Preenche e realiza o login dentro do popup
+cy.get('.popup.popped')
   .should('be.visible')
-  .click({ force: true });
-  
-      cy.wait(7000)
+  .within(() => {
+    cy.get('input[ng-model="credentials.username"]')
+      .should('be.visible')
+      .clear()
+      .type('qualidade2@lectortec.com.br')
+
+    cy.get('#login_password_navbar')
+      .should('be.visible')
+      .clear()
+      .type('2006lrnrgr', { log: false })
+
+    cy.contains('button[ng-click="login()"]', 'Entrar')
+      .should('be.visible')
+      .click()
+      cy.wait(10000)
 
   });
+
+});
+
 
     it("Vai na Categoria", () => {
 
@@ -953,13 +961,211 @@ cy.get('.showcase-rich-text-content img', { timeout: 10000 })
   .should('be.visible')
   .click({ force: true });
 
+  cy.wait(4000)
 
+    //Clica em editar
+ cy.contains('tr', 'Primeira Vitrine Automação Cypress')
+  .within(() => {
+    cy.get('button[ng-click="editShowcase(showcase)"]')
+    .scrollIntoView()
+      .click({ force: true })
+  });
 
     });
 
+    it('Edita a vitrine', () => {
+
+      //Clica em editar no carrosel
+      cy.get(':nth-child(3) > .actions > .actions-line > :nth-child(1) > .btn')
+      .scrollIntoView()
+  .click({ force: true });
+
+const conteudosParaExcluir = [
+  'Categoria de Trilhas',
+  'Categoria de treinamentos',
+  'Vídeo - Link',
+  'Documento',
+  'Diretório de documentos',
+  'Gravações',
+  'Categoria de gravações'
+]
+
+cy.wrap(conteudosParaExcluir).each((nome) => {
+  return cy.contains(
+    'table.carousel-contents:visible tbody tr',
+    nome,
+    {
+      matchCase: false,
+      timeout: 15000
+    }
+  )
+    .should('exist')
+    .scrollIntoView({ block: 'center' })
+    .within(() => {
+      cy.get('button[ng-click^="removeContent"]')
+        .should('exist')
+        .click({ force: true })
+    })
+    .then(() => {
+      cy.wait(1500)
+    })
+})
+
+cy.wait(2000);
+
+//Escreve o título
+cy.get('input[placeholder="Título"]')
+  .then(($input) => {
+    const input = $input[0];
+
+    input.removeAttribute('disabled');
+    input.focus();
+    input.value = 'Título EDITADO LECTOR';
+
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    input.dispatchEvent(new Event('blur', { bubbles: true }));
+  });
 
 
+  cy.wait(1000);
+
+cy.get('input[placeholder="Descrição"]')
+  .then(($input) => {
+    const input = $input[0];
+
+    input.removeAttribute('disabled');
+    input.focus();
+    input.value = 'Descrição EDITADA LECTOR';
+
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    input.dispatchEvent(new Event('blur', { bubbles: true }));
+  });
+
+    //Clica em Salvar no carrosel
+  cy.get('[ng-click="saveCarousel()"]')
+  .scrollIntoView()
+  .click();
+
+  cy.wait(1000);
+
+    //Salva a Vitrine
+  cy.get('.open-content > .end > .btn-swipe-accent')
+  .should('be.visible')
+  .click();
+        
+    });
     
+    it('Clica em sair', () => {
+
+        cy.wait(4000);
+
+        //Clioca no icon
+  cy.contains('div', 'Administrador',{ timeout: 60000 })
+  .should('be.visible')
+  .click({ force: true });
+
+  cy.wait(2000)
+    
+// Clica em Sair
+cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
+  .should('be.visible')
+  .parents('div.option.menu-option')
+  .first()
+  .click({ force: true });
+
+    });
+
+     it('Vai até a vitrine', () => {
+
+        cy.wait(7000);
+
+        cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
+  .should('be.visible')
+  .click({ force: true });
+
+        //Vai até a vitrine
+        cy.contains('span', 'Primeira Vitrine')
+  .closest('button')
+  .click();
+
+  //Vai até a vitrine criada
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Primeira Vitrine Aut', { timeout: 10000 })
+  .should('be.visible')
+  .parents('button.menu-open-showcase')
+  .first()
+  .click({ force: true });
+
+    });
+
+        it('Verifica se todos os componentes estão na pagina', () => {
+
+        cy.wait(5000);
+
+        cy.get('card-carousel.CARD_THEME3')
+  .scrollIntoView({ block: 'center' })
+  .should('exist')
+  .within(() => {
+    cy.get('ul.showcase-card-carousel-track')
+      .first()
+      .scrollIntoView({ block: 'center' })
+      .children('li')
+      .should('have.length', 2)
+      .then(($cards) => {
+        const textos = $cards.toArray().map((card) =>
+          card.innerText.replace(/\s+/g, ' ').trim()
+        )
+
+        expect(textos.join(' ')).to.include('breadcrumb teste 0206')
+        expect(textos.join(' ')).to.include('8686')
+      })
+  })
+
+        // Verifica se a área de pesquisa está visível
+cy.get('.showcase-search', { timeout: 10000 })
+  .should('be.visible');
+
+  // Verifica se o banner está visível
+cy.get('a.banner-container', { timeout: 10000 })
+  .should('be.visible');
+
+  const tituloVitrine = 'Título EDITADO LECTOR';
+const descricaoVitrine = 'Descrição EDITADA LECTOR';
+
+cy.contains('.carousel-container', tituloVitrine, { timeout: 20000 })
+  .scrollIntoView()
+  .should('be.visible')
+  .within(() => {
+    cy.contains('.showcase-title span', tituloVitrine)
+      .should('be.visible');
+
+    cy.contains('.showcase-description', descricaoVitrine)
+      .should('be.visible');
+
+    cy.get('card-carousel', { timeout: 10000 })
+      .should('exist')
+      .and('be.visible');
+  });
+
+  // Verifica se o bloco de Rich Text está visível
+cy.get('.showcase-rich-text-content', { timeout: 10000 })
+  .scrollIntoView()
+  .should('be.visible');
+
+// Verifica o texto do Rich Text
+cy.get('.showcase-rich-text-content')
+  .should('contain.text', 'Texto de teste no Rich Text');
+
+// Verifica se a imagem do Rich Text está visível
+cy.get('.showcase-rich-text-content img', { timeout: 10000 })
+  .should('be.visible')
+  .and(($img) => {
+    expect($img[0].naturalWidth).to.be.greaterThan(0);
+  });
+    
+  });
+
 
 
 
