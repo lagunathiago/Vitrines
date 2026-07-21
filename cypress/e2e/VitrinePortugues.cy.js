@@ -38,7 +38,7 @@ describe("Teste - Login", () => {
 
   context("Criando Vitrine", { testIsolation: false }, () => {
   
-   /*
+
     it("Cria a categoria", () => {
 
       // Clicando na Vitrine
@@ -57,7 +57,7 @@ describe("Teste - Login", () => {
 
     });
 
-    
+
     it('Cria a vitrine', () => {
 
         //Clica em criar vitrine
@@ -817,7 +817,6 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'P�
 
     });
 
-
      it('Clica em sair', () => {
 
         cy.wait(4000);
@@ -945,7 +944,6 @@ cy.get('.popup.popped')
   });
 
 });
-*/
 
     it("Vai na Categoria", () => {
 
@@ -1137,10 +1135,12 @@ cy.get('input[placeholder="Descrição"]')
 
     //Salva a Vitrine
   cy.get('.open-content > .end > .btn-swipe-accent')
+  .scrollIntoView()
   .should('be.visible')
   .click();
-        
 
+  cy.wait(5000)
+    
 
     });
 
