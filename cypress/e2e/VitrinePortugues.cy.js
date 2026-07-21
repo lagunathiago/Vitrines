@@ -37,7 +37,6 @@ describe("Teste - Login", () => {
   });
 
   context("Criando Vitrine", { testIsolation: false }, () => {
-  
 
     it("Cria a categoria", () => {
 
