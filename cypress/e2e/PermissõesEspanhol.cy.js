@@ -42,8 +42,6 @@ describe("Teste - Login", () => {
 
   context("Teste de Permissão", { testIsolation: false }, () => {
 
-
-
  // #################################################################################################
 // #                                                                                               #
 // #                         VEREFICA SE A VITRINE PUBLICA NÃO ESTÁ DISPONIVEL PRO PERFIL ALUNO  EM PORTUGUES                         #
@@ -67,20 +65,20 @@ describe("Teste - Login", () => {
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -88,11 +86,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
         
     });
 
-       it('Verifica se a vitrine está disponivel na visão publca em ingles', () => {
+       it('Verifica se a vitrine está disponivel na visão publca em Espanhol', () => {
 
         cy.wait(2000);
 
-        cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+        cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
   .should('be.visible')
   .click({ force: true });
 
@@ -102,7 +100,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   .click();
 
  //Vai até a vitrine criada
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress', { timeout: 10000 })
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 10000 })
   .should('be.visible')
   .parents('button.menu-open-showcase')
   .first()
@@ -122,8 +120,8 @@ cy.get('.showcase-search', { timeout: 10000 })
 cy.get('a.banner-container', { timeout: 10000 })
   .should('be.visible');
 
-  const tituloVitrine = 'Título EDITADO LECTOR INGLES';
-const descricaoVitrine = 'Descrição EDITADA LECTOR INGLES';
+  const tituloVitrine = 'Título EDITADO LECTOR Espanhol';
+const descricaoVitrine = 'Descrição EDITADA LECTOR Espanhol';
 
 cy.contains('.carousel-container', tituloVitrine, { timeout: 20000 })
   .scrollIntoView()
@@ -175,6 +173,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
         
     });
 
+    
       it('Loga no Perfil administrador para adicionar Permissão Grupo (Grupo - 2)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -222,11 +221,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -343,21 +342,21 @@ it('Entra no perfil que faz parte do "Grupo - 2"', () => {
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -365,10 +364,10 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
         
     });
 
-      it('Vai até a vitrine e Verefica se a está disponivel para o Usuario do grupo no idioma Ingles', () => {
+      it('Vai até a vitrine e Verefica se a está disponivel para o Usuario do grupo no idioma Espanhol', () => {
         cy.wait(7000);
 
-        cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+        cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
   .should('be.visible')
   .click({ force: true });
 
@@ -378,7 +377,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   .click();
 
  //Vai até a vitrine criada
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress', { timeout: 10000 })
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 10000 })
   .should('be.visible')
   .parents('button.menu-open-showcase')
   .first()
@@ -388,7 +387,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   //Verefica se a vitrine está aberta
 cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
+  .should('contain.text', 'Vitrine Espanhol Cypress');
 
      });
 
@@ -445,21 +444,21 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -471,7 +470,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -484,9 +483,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -552,11 +551,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -632,13 +631,13 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -650,7 +649,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -663,9 +662,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -689,7 +688,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 // #                         TESTE DE PERMISSÃO DE CARGO (ANALISTA DE TESTES JR)                                  #
 // #                                                                                               #
 // #################################################################################################
-
 
       it('Adicina Permissão Cargo (Analista de Testes JR)', () => {
         
@@ -739,11 +737,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -813,7 +811,6 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'An
    
        });
 
-
          it('Entra no perfil que faz parte do "Analista de Testes JR"', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -853,21 +850,21 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'An
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -878,7 +875,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
       it('Vai até a vitrine e Verefica se a está disponivel para o Usuario', () => {
         cy.wait(7000);
 
-        cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+        cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
   .should('be.visible')
   .click({ force: true });
 
@@ -888,7 +885,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   .click();
 
  //Vai até a vitrine criada
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress', { timeout: 10000 })
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 10000 })
   .should('be.visible')
   .parents('button.menu-open-showcase')
   .first()
@@ -898,7 +895,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   //Verefica se a vitrine está aberta
 cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
+  .should('contain.text', 'Vitrine Espanhol Cypress');
 
      });
 
@@ -912,9 +909,8 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   .should('be.visible')
   .click({ force: true })
 
-  cy.wait(8000)
+  cy.wait(12000)
         
-
     });
 
              it('Entra em outro perfil que não faz parte do cargo (Analista de Testes JR)', () => {
@@ -956,25 +952,24 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
-
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
-  cy.wait(8000)
+  cy.wait(12000)
         
     });
 
@@ -982,7 +977,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -995,9 +990,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -1012,7 +1007,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   .should('be.visible')
   .click({ force: true })
 
-  cy.wait(8000)
+  cy.wait(12000)
 
     });
 
@@ -1063,11 +1058,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -1143,13 +1138,13 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -1157,11 +1152,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
         
     });
 
-       it('Verefica que a vitrine nestá mais visivel pro usuario', () => {
+       it('Verefica que a vitrine não está mais visivel pro usuario', () => {
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -1174,9 +1169,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -1249,11 +1244,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -1293,7 +1288,6 @@ clicarEditarVitrine()
   cy.get('.default-padding.ng-scope > .permission-select > [ng-show="showUser"] > .column > .multiselect > .border > .ui-select-match > .btn-default')
   .should('be.visible')
   .click({ force: true });
-  
 
 // Digita Outro
 cy.get('.permission-select input.ui-select-search:visible', { timeout: 10000 })
@@ -1337,7 +1331,7 @@ cy.get('.ui-select-choices-row:visible span[title="Outro"]', { timeout: 10000 })
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
-    cy.wait(10000);
+    cy.wait(12000);
 
     // opcional: garante que saiu da tela de login
     cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
@@ -1383,21 +1377,21 @@ cy.get('.ui-select-choices-row:visible span[title="Outro"]', { timeout: 10000 })
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -1408,7 +1402,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
       it('Vai até a vitrine e Verefica se a está disponivel para o Usuario', () => {
         cy.wait(7000);
 
-        cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+        cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
   .should('be.visible')
   .click({ force: true });
 
@@ -1418,7 +1412,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   .click();
 
  //Vai até a vitrine criada
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress', { timeout: 10000 })
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 10000 })
   .should('be.visible')
   .parents('button.menu-open-showcase')
   .first()
@@ -1428,7 +1422,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   //Verefica se a vitrine está aberta
 cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
+  .should('contain.text', 'Vitrine Espanhol Cypress');
 
      });
 
@@ -1443,7 +1437,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   .click({ force: true })
 
   cy.wait(8000)
-        
 
     });
 
@@ -1462,7 +1455,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
-    cy.wait(10000);
+    cy.wait(12000);
 
     // opcional: garante que saiu da tela de login
     cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
@@ -1470,7 +1463,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
      });
 
       it('Verefica que a vitrine nao estreja disponivel pro perfil aluno', () => {
-        cy.wait(7000);
+        cy.wait(8000);
 
         cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
   .should('be.visible')
@@ -1486,21 +1479,21 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -1512,7 +1505,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -1525,9 +1518,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -1542,7 +1535,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   .should('be.visible')
   .click({ force: true })
 
-  cy.wait(8000)
+  cy.wait(10000)
 
     });
 
@@ -1593,11 +1586,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -1673,13 +1666,13 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -1687,11 +1680,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
         
     });
 
-       it('Verefica que a vitrine nÃO stá mais visivel pro usuario', () => {
+       it('Verefica que a vitrine não stá mais visivel pro usuario', () => {
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -1704,9 +1697,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -1781,11 +1774,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -1894,21 +1887,21 @@ cy.get('.permission-select input.ui-select-search:visible', { timeout: 10000 })
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -1919,7 +1912,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
       it('Vai até a vitrine e Verefica se a está disponivel para o Usuario', () => {
         cy.wait(7000);
 
-        cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+        cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
   .should('be.visible')
   .click({ force: true });
 
@@ -1929,7 +1922,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   .click();
 
  //Vai até a vitrine criada
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress', { timeout: 10000 })
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 10000 })
   .should('be.visible')
   .parents('button.menu-open-showcase')
   .first()
@@ -1939,7 +1932,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   //Verefica se a vitrine está aberta
 cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
+  .should('contain.text', 'Vitrine Espanhol Cypress');
 
      });
 
@@ -1997,21 +1990,21 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -2023,7 +2016,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -2036,9 +2029,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -2104,11 +2097,11 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -2184,13 +2177,13 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 
      });
 
-       it('Troca para pro idioma Ingles', () => {
+       it('Troca para pro idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
-        //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+        //Clica em Espanhol
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -2202,7 +2195,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(8000);
 
-  cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+  cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
     .should('be.visible')
     .click({ force: true });
 
@@ -2215,9 +2208,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   // Verifica que a vitrine não está disponível para o usuário
   cy.get('#showcaseNavigation2026', { timeout: 10000 })
     .should('be.visible')
-    .and('not.contain.text', 'Vitrine Ingles Cypress');
+    .and('not.contain.text', 'Vitrine Espanhol Cypress');
 
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress')
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
     });
@@ -2290,11 +2283,11 @@ it('Clica na Categoria', () => {
   const clicarEditarVitrine = (tentativa = 1) => {
     cy.get('body').then(($body) => {
       const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Ingles Cypress'))
+        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -2350,7 +2343,7 @@ cy.get('.ui-select-choices:visible', { timeout: 10000 })
     });
 
     it('Verifica que a vitrine não está na categoria', () => {
-  cy.contains('table tbody tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).should('not.exist')
+  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).should('not.exist')
 })
 
 it('Clica na categoria LECTOR (Não mexer) e verifica se aparece a vitrine nesta categoria', () => {
@@ -2375,14 +2368,14 @@ it('Clica na categoria LECTOR (Não mexer) e verifica se aparece a vitrine nesta
 
       it('Verifica que a vitrine está na categoria', () => {
 
-        cy.contains('table tbody div.ng-binding', 'Vitrine Ingles Cypress', { timeout: 60000 })
+        cy.contains('table tbody div.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 60000 })
   .should('be.visible')
 
   });
 
 it('Joga a vitrine pra categoria todos', () => {
 
-  cy.contains('table tbody tr', 'Vitrine Ingles Cypress', { timeout: 60000 })
+  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 60000 })
   .should('be.visible')
   .within(() => {
     cy.get('button.icon-edit').should('be.visible').click({ force: true })
@@ -2406,7 +2399,7 @@ it('Joga a vitrine pra categoria todos', () => {
     });
 
     it('Verifica que a vitrine não está na categoria', () => {
-  cy.contains('table tbody tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).should('not.exist')
+  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).should('not.exist')
 
     })
 
@@ -2433,7 +2426,7 @@ cy.contains('table tbody div.ng-binding', /^teste automoção$/i, { timeout: 600
 
    it('Verifica que a vitrine está na categoria', () => {
 
-        cy.contains('table tbody div.ng-binding', 'Vitrine Ingles Cypress', { timeout: 60000 })
+        cy.contains('table tbody div.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 60000 })
         .scrollIntoView()
         .should('be.visible') 
 
@@ -2441,7 +2434,7 @@ cy.contains('table tbody div.ng-binding', /^teste automoção$/i, { timeout: 600
 
   it('Joga a vitrine novamente pra categoria Primeira Vitrine Cypress', () => {
 
-  cy.contains('table tbody tr', 'Vitrine Ingles Cypress', { timeout: 60000 })
+  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 60000 })
   .scrollIntoView()
   .should('be.visible')
   .within(() => {
@@ -2449,7 +2442,7 @@ cy.contains('table tbody div.ng-binding', /^teste automoção$/i, { timeout: 600
   })
 
    cy.wait(1000);
-
+   
 })
    
 
@@ -2485,7 +2478,7 @@ cy.get('.ui-select-choices:visible', { timeout: 10000 })
   cy.wait(1000)
 
   cy.get('body').then(($body) => {
-    const apareceu = $body.find('table tbody div.ng-binding:contains("Vitrine Ingles Cypress"):visible').length > 0
+    const apareceu = $body.find('table tbody div.ng-binding:contains("Vitrine Espanhol Cypress"):visible').length > 0
 
     if (!apareceu && tentativa < 3) abrirPrimeiraVitrine(tentativa + 1)
   })
@@ -2493,7 +2486,7 @@ cy.get('.ui-select-choices:visible', { timeout: 10000 })
 
 abrirPrimeiraVitrine()
 
-cy.contains('table tbody div.ng-binding', 'Vitrine Ingles Cypress', { timeout: 60000 }).should('be.visible')
+cy.contains('table tbody div.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 60000 }).should('be.visible')
 
      });
 

@@ -44,7 +44,6 @@ describe("Teste - Login", () => {
 // #                                                                                               #
 // #################################################################################################
 
-
     
      it('Vai até a vitrine', () => {
         cy.wait(7000);
@@ -460,7 +459,6 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 // #                         TESTE DE PERMISSÃO DE CARGO (ANALISTA DE TESTES JR)                                  #
 // #                                                                                               #
 // #################################################################################################
-
     
       it('Adicina Permissão Cargo (Analista de Testes JR)', () => {
         

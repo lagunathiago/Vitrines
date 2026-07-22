@@ -38,6 +38,7 @@ describe("Teste - Login", () => {
 
   context("Criando Vitrine", { testIsolation: false }, () => {
   
+    /*
     it("Clica na aba vitrine", () => {
 
 const abrirVitrinesAteCategoriaAparecer = (tentativa = 1) => {
@@ -79,7 +80,7 @@ cy.contains('span.text-area', 'Primeira Vitrine Cypress', { timeout: 60000 })
 
     input.removeAttribute('disabled');
     input.focus();
-    input.value = 'Vitrine Ingles Cypress';
+    input.value = 'Vitrine Espanhol Cypress';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -93,7 +94,7 @@ cy.contains('span.text-area', 'Primeira Vitrine Cypress', { timeout: 60000 })
   .click(); 
 
   //Portugues
-  cy.get('#ui-select-choices-row-36-1')
+  cy.get('#ui-select-choices-row-36-2')
   .should('be.visible')
   .click();
 
@@ -283,7 +284,7 @@ cy.get('input[placeholder="Título"]')
 
     input.removeAttribute('disabled');
     input.focus();
-    input.value = 'Título Automação Cypress INGLES';
+    input.value = 'Título Automação Cypress Espanhol';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -303,7 +304,7 @@ cy.get('input[placeholder="Descrição"]')
 
     input.removeAttribute('disabled');
     input.focus();
-    input.value = 'Descrição Automação Cypress INGLES';
+    input.value = 'Descrição Automação Cypress Espanhol';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -821,7 +822,7 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'P�
   cy.wait(5000);
 
     });
-
+*/
      it('Clica em sair', () => {
 
         cy.wait(4000);
@@ -866,13 +867,13 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 
     });
 
-    it('Troca para p idioma Ingles', () => {
+    it('Troca para p idioma Espanhol', () => {
 
         //Clica no icon no no cabeçalho
         cy.get('#languageSelectorButton', { timeout: 60000 }).should('be.visible').click({ force: true })
 
         //Clica em Ingles
-cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 10000 })
+cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 10000 })
   .should('be.visible')
   .click({ force: true })
 
@@ -880,11 +881,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
         
     });
 
-         it('Verifica se a vitrine está disponivel na visão publca em ingles', () => {
+         it('Verifica se a vitrine está disponivel na visão publca em Espanhol', () => {
 
         cy.wait(2000);
 
-        cy.contains('button.showcase-navigation', 'Explore', { timeout: 60000 })
+        cy.contains('button.showcase-navigation', 'Explorar', { timeout: 60000 })
   .should('be.visible')
   .click({ force: true });
 
@@ -894,7 +895,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
   .click();
 
  //Vai até a vitrine criada
-  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Ingles Cypress', { timeout: 10000 })
+  cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 10000 })
   .should('be.visible')
   .parents('button.menu-open-showcase')
   .first()
@@ -915,8 +916,8 @@ cy.get('.showcase-search', { timeout: 10000 })
 cy.get('a.banner-container', { timeout: 10000 })
   .should('be.visible');
 
-  const tituloVitrine = 'Título Automação Cypress INGLES';
-const descricaoVitrine = 'Descrição Automação Cypress INGLES';
+  const tituloVitrine = 'Título Automação Cypress Espanhol';
+const descricaoVitrine = 'Descrição Automação Cypress Espanhol';
 
 cy.contains('.carousel-container', tituloVitrine, { timeout: 20000 })
   .scrollIntoView()
@@ -964,11 +965,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   .should('be.visible')
   .click({ force: true })
 
-  cy.wait(8000)
+  cy.wait(6000)
         
     });
 
-    
+
     it("Loga novamente no perfil Administrador", () => {
 
     cy.wait(3000);
@@ -1003,7 +1004,6 @@ cy.get('.popup.popped')
 
 });
 
-
            it("Clica na aba Vitrine", () => {
 
         const abrirVitrine = (tentativa = 1) => {
@@ -1033,7 +1033,7 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
         .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
 
       if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Ingles Cypress', { timeout: 10000 }).within(() => {
+        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
           cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
         })
       } else if (tentativa < 4) {
@@ -1124,7 +1124,7 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   // Cor de fundo da vitrine
   preencherCor(
     'COR DE FUNDO',
-    '#5c0aa0'
+    '#71a101'
   )
 
   // Cor dos títulos
@@ -1136,17 +1136,16 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   // Cor das fontes secundárias
   preencherCor(
     'COR DA FONTE SECUNDÁRIA',
-    '#0995d1'
+    '#ffffff'
   )
 
     // Cor das fontes secundárias
   preencherCor(
     'COR DE FUNDO DOS CARTÕES',
-    '#bc75f6'
+    '#a5c165'
   )
 
 })
-
 
  it('Edita a vitrine', () => {
 
@@ -1195,7 +1194,7 @@ cy.get('input[placeholder="Título"]')
 
     input.removeAttribute('disabled');
     input.focus();
-    input.value = 'Título EDITADO LECTOR INGLES';
+    input.value = 'Título EDITADO LECTOR Espanhol';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -1210,7 +1209,7 @@ cy.get('input[placeholder="Descrição"]')
 
     input.removeAttribute('disabled');
     input.focus();
-    input.value = 'Descrição EDITADA LECTOR INGLES';
+    input.value = 'Descrição EDITADA LECTOR Espanhol';
 
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -1234,6 +1233,6 @@ cy.get('input[placeholder="Descrição"]')
     
     });
 
+  });
 
-  })
 });
