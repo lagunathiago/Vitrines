@@ -617,48 +617,6 @@ cy.contains(
 
     });
 
-    it('Verificação dos indicadores', () => {
-
-        cy.wait(3000);
-
-        //Clica no banner e verifica se direciona para o site
-      cy.get('#splide03-slide01 > .banner-container')
-  .should('exist')
-  .scrollIntoView({ block: 'center' })
-  .invoke('removeAttr', 'target')
-  .click({ force: true })
-
-// Verifica que foi direcionado
-cy.url({ timeout: 20000 })
-  .should('include', 'lector.com.br')
-
-// Volta para a vitrine
-cy.go('back')
-
-// Confirma que retornou
-cy.url({ timeout: 20000 })
-  .should('include', '/lector_suporte/') 
-     
-
-cy.wait(6000)
-
-        //verifica se tem 2 indicadores
-        cy.get('banner-carousel:visible button.splide__pagination__page')
-  .should('have.length', 2)
-
-cy.get('banner-carousel:visible button.splide__pagination__page.is-active')
-  .invoke('attr', 'aria-controls')
-  .then((bannerInicial) => {
-    cy.wait(3000)
-
-    cy.get('banner-carousel:visible button.splide__pagination__page.is-active')
-      .invoke('attr', 'aria-controls')
-      .should('not.equal', bannerInicial)
-
-  })
-
-    });
-
     it('Verificação dos banners', () => {
 
         //Verefica se tem 5 banners

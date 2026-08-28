@@ -147,10 +147,7 @@ cy.get(':nth-child(1) > .flex > .checkbox > .icon-checkbox')
     cy.wait(500)
 
     // Abre o primeiro seletor, que começa como Trilha
-    cy.get(
-      '.modal:visible .add-content > :nth-child(1) > [ng-show="modal.editCarousel"]',
-      { timeout: 20000 }
-    )
+    cy.get('[ng-if="modal.editCarousel"] > .ui-select-container', { timeout: 30000 })
       .should('be.visible')
       .click({ force: true })
 

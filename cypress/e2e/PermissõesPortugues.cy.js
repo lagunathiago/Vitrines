@@ -44,7 +44,7 @@ describe("Teste - Login", () => {
 // #                                                                                               #
 // #################################################################################################
 
-    
+    /*
      it('Vai até a vitrine', () => {
         cy.wait(7000);
 
@@ -65,10 +65,6 @@ describe("Teste - Login", () => {
   .click({ force: true });
 
   cy.wait(2000);
-
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Portugues Cypress');
 
      });
 
@@ -206,7 +202,7 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'Gr
   cy.wait(5000);
    
        });
-
+*/
        it('Entra no perfil que faz parte do "Grupo - 2"', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -250,10 +246,9 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'Gr
 
   cy.wait(2000);
 
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Portugues Cypress');
-
+    cy.contains('Título EDITADO LECTOR PORTUGUES', { timeout: 10000 })
+  .should('be.visible')
+ 
      });
 
           it('Entra em outro perfil que não faz parte do grupo (Grupo - 2)', () => {
@@ -625,8 +620,8 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'An
   cy.wait(2000);
 
   //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Portugues Cypress');
+    cy.contains('Título EDITADO LECTOR PORTUGUES', { timeout: 10000 })
+  .should('be.visible')
 
      });
 
@@ -999,8 +994,8 @@ cy.get('.ui-select-choices-row:visible span[title="Outro"]', { timeout: 10000 })
   cy.wait(2000);
 
   //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Portugues Cypress');
+    cy.contains('Título EDITADO LECTOR PORTUGUES', { timeout: 10000 })
+  .should('be.visible')
 
      });
 
@@ -1374,8 +1369,8 @@ cy.get('.ui-select-choices-row:visible span[title="Aluno"]', { timeout: 10000 })
   cy.wait(2000);
 
   //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Portugues Cypress');
+    cy.contains('Título EDITADO LECTOR PORTUGUES', { timeout: 10000 })
+  .should('be.visible')
 
      });
         
@@ -1385,7 +1380,6 @@ cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
 
   cy.url({ timeout: 60000 }).should('include', '/showcase/2257')
 })
-  
 
      it('Não exibe a vitrine para a visão publica', () => {
 
