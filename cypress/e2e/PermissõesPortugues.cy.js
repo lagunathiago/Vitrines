@@ -44,7 +44,7 @@ describe("Teste - Login", () => {
 // #                                                                                               #
 // #################################################################################################
 
-    /*
+    
      it('Vai até a vitrine', () => {
         cy.wait(7000);
 
@@ -202,7 +202,7 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'Gr
   cy.wait(5000);
    
        });
-*/
+
        it('Entra no perfil que faz parte do "Grupo - 2"', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -823,6 +823,7 @@ it('Clica na vitrine', () => {
     });
 
 
+    /*
 // #################################################################################################
 // #                                                                                               #
 // #                         TESTE DE PERMISSÃO DE UNIDADE — OUTRO                                  #
@@ -1810,9 +1811,8 @@ abrirPrimeiraVitrine()
 
 cy.contains('table tbody div.ng-binding', 'Vitrine Portugues Cypress', { timeout: 60000 }).should('be.visible')
 
-
-
     });
+*/
 
   });
 

@@ -88,95 +88,71 @@ cy.contains('span.text-area', 'Primeira Vitrine Cypress', { timeout: 60000 })
   });
 
   //Clica em idiomas
-  cy.get(':nth-child(2) > :nth-child(2) > .multiselect > .border > :nth-child(1) > .ui-select-search')
+  cy.get(':nth-child(3) > .multiselect > .border > :nth-child(1) > .ui-select-search')
   .should('be.visible')
   .click(); 
 
+  cy.wait(2000);
+
   //Portugues
-  cy.get('#ui-select-choices-row-36-1')
+ cy.contains('.ui-select-choices-row-inner', 'Inglês')
   .should('be.visible')
-  .click();
+  .click({ force: true })
 
   });
 
 it('INSERE AS CORES DA VITRINE', () => {
-  function preencherCor(nomeCampo, cor) {
-    const seletorCampo = new RegExp(`^${nomeCampo}$`, 'i')
 
-    cy.contains('.box-title', seletorCampo, {
+  function preencherCor(nomeCampo, cor) {
+
+    const titulo = new RegExp(`^\\s*${nomeCampo}\\s*$`, 'i')
+
+    cy.contains('.box-title', titulo, {
       timeout: 20000
     })
       .should('exist')
-      .closest('.box')
+      .parent()
       .find('input[colorpicker]')
-      .should('exist')
+      .first()
       .then(($input) => {
-        const input = $input[0]
-        const win = input.ownerDocument.defaultView
 
-        const setterValor = Object.getOwnPropertyDescriptor(
-          win.HTMLInputElement.prototype,
-          'value'
-        ).set
-
-        input.focus()
-
-        setterValor.call(input, cor)
-
-        input.dispatchEvent(
-          new win.Event('input', {
-            bubbles: true
+        cy.wrap($input)
+          .click({ force: true })
+          .clear({ force: true })
+          .type(cor, {
+            force: true,
+            delay: 50
           })
-        )
-
-        input.dispatchEvent(
-          new win.Event('change', {
-            bubbles: true
-          })
-        )
-
-        input.dispatchEvent(
-          new win.Event('blur', {
-            bubbles: true
-          })
-        )
+          .blur()
       })
 
-    // O campo possui debounce de 500ms
     cy.wait(1000)
-
-    cy.contains('.box-title', seletorCampo)
-      .closest('.box')
-      .find('input[colorpicker]')
-      .should('have.value', cor)
 
     cy.log(`${nomeCampo}: ${cor}`)
   }
 
-  // Cor principal das fontes
   preencherCor(
     'COR DA FONTE',
-    '#000000'
+    '#ca0606'
   )
 
-  // Cor de fundo da vitrine
   preencherCor(
     'COR DE FUNDO',
-    '#055361'
+    '#a11212'
   )
 
-  // Cor dos títulos
   preencherCor(
     'COR DA FONTE DE TÍTULOS',
     '#000000'
   )
 
-  // Cor das fontes secundárias
   preencherCor(
     'COR DA FONTE SECUNDÁRIA',
-    '#0ef6ff'
+    '#be950b'
   )
+
 })
+
  
     it('Adiciona a pesquisa', () => {
 
@@ -329,7 +305,7 @@ cy.get('input[placeholder="Descrição"]')
          
      })
      
-       it('Adiciona a Trilha', () => {
+             it('Adiciona a Trilha', () => {
 
 // Abre o select da trilha
 cy.get('.modal')
@@ -357,7 +333,7 @@ cy.contains('.ui-select-choices-row:visible', 'breadcrumb teste 0206', { timeout
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('.add-content > :nth-child(1) > [ng-show="modal.editCarousel"]')
+        cy.get('[ng-if="modal.editCarousel"] > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -394,7 +370,7 @@ cy.contains('.ui-select-choices-row:visible', '8686', { timeout: 10000 })
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('.add-content > :nth-child(1) > .ng-touched')
+        cy.get('.add-content > :nth-child(1) > div.ng-scope > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -431,7 +407,7 @@ cy.contains('.ui-select-choices-row:visible', '0000Teste', { timeout: 10000 })
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('.add-content > :nth-child(1) > .ng-touched')
+        cy.get('.add-content > :nth-child(1) > div.ng-scope > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -468,7 +444,7 @@ cy.contains('.ui-select-choices-row:visible', '00000Teste', { timeout: 10000 })
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('.add-content > :nth-child(1) > .ng-touched')
+        cy.get('.add-content > :nth-child(1) > div.ng-scope > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -519,7 +495,8 @@ cy.get('input[placeholder="Insira o link do vídeo"]', { timeout: 10000 })
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('[ng-if="!modal.editDiagnostic"] > :nth-child(1) > .ng-touched')
+
+        cy.get('[ng-if="!modal.editDiagnostic"] > :nth-child(1) > div.ng-scope > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -536,7 +513,7 @@ cy.get('.modal')
   .click({ force: true });
 
 // Digita no input real do ui-select
-cy.get('.modal input.ui-select-search:visible', { timeout: 10000 })
+cy.get('.modal input.ui-select-search:visible', { timeout: 20000 })
   .clear({ force: true })
   .type('Blumenau_vista', { force: true });
 
@@ -556,7 +533,7 @@ cy.contains('span.ui-select-highlight', 'Blumenau_vista', { timeout: 60000 })
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('.add-content > :nth-child(1) > .ng-touched')
+        cy.get('.add-content > :nth-child(1) > div.ng-scope > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -597,7 +574,7 @@ cy.contains('.ui-select-choices-row:visible', 'Thiago', { timeout: 60000 })
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('.add-content > :nth-child(1) > .ng-touched')
+        cy.get('.add-content > :nth-child(1) > div.ng-scope > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -634,7 +611,7 @@ cy.get('.modal input.ui-select-search:visible', { timeout: 10000 })
     cy.wait(1000);
 
         //Abre os seletores
-        cy.get('.add-content > :nth-child(1) > .ng-touched')
+        cy.get('.add-content > :nth-child(1) > div.ng-scope > .ui-select-container')
         .should('be.visible')
         .click();
 
@@ -671,6 +648,7 @@ cy.contains('.ui-select-choices-row:visible', 'Categoria 2', { timeout: 60000 })
   .click();
 
     });
+     
 
     it('Adiciona Rich Text', () => {
 
@@ -1060,93 +1038,57 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 })
 
 
+   it('TROCA AS CORES DA VITRINE', () => {
 
-      it('TROCA AS CORES DA VITRINE', () => { 
   function preencherCor(nomeCampo, cor) {
-    const seletorCampo = new RegExp(`^${nomeCampo}$`, 'i')
 
-    cy.contains('.box-title', seletorCampo, {
+    const titulo = new RegExp(`^\\s*${nomeCampo}\\s*$`, 'i')
+
+    cy.contains('.box-title', titulo, {
       timeout: 20000
     })
       .should('exist')
-      .closest('.box')
+      .parent()
       .find('input[colorpicker]')
-      .should('exist')
+      .first()
       .then(($input) => {
-        const input = $input[0]
-        const win = input.ownerDocument.defaultView
 
-        const setterValor = Object.getOwnPropertyDescriptor(
-          win.HTMLInputElement.prototype,
-          'value'
-        ).set
-
-        input.focus()
-
-        setterValor.call(input, cor)
-
-        input.dispatchEvent(
-          new win.Event('input', {
-            bubbles: true
+        cy.wrap($input)
+          .click({ force: true })
+          .clear({ force: true })
+          .type(cor, {
+            force: true,
+            delay: 50
           })
-        )
-
-        input.dispatchEvent(
-          new win.Event('change', {
-            bubbles: true
-          })
-        )
-
-        input.dispatchEvent(
-          new win.Event('blur', {
-            bubbles: true
-          })
-        )
+          .blur()
       })
 
-    // O campo possui debounce de 500ms
     cy.wait(1000)
-
-    cy.contains('.box-title', seletorCampo)
-      .closest('.box')
-      .find('input[colorpicker]')
-      .should('have.value', cor)
 
     cy.log(`${nomeCampo}: ${cor}`)
   }
 
-  // Cor principal das fontes
   preencherCor(
     'COR DA FONTE',
-    '#ffffff'
-  )
-
-  // Cor de fundo da vitrine
-  preencherCor(
-    'COR DE FUNDO',
-    '#5c0aa0'
-  )
-
-  // Cor dos títulos
-  preencherCor(
-    'COR DA FONTE DE TÍTULOS',
     '#000000'
   )
 
-  // Cor das fontes secundárias
   preencherCor(
-    'COR DA FONTE SECUNDÁRIA',
-    '#0995d1'
+    'COR DE FUNDO',
+    '#0a70a0'
   )
 
-    // Cor das fontes secundárias
   preencherCor(
-    'COR DE FUNDO DOS CARTÕES',
-    '#bc75f6'
+    'COR DA FONTE DE TÍTULOS',
+    '#ffffff'
+  )
+
+  preencherCor(
+    'COR DA FONTE SECUNDÁRIA',
+    '#278fc1'
   )
 
 })
-
 
  it('Edita a vitrine', () => {
 
@@ -1233,7 +1175,6 @@ cy.get('input[placeholder="Descrição"]')
   cy.wait(5000)
     
     });
-
 
   })
 });

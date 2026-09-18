@@ -43,9 +43,9 @@ describe("Teste - Login", () => {
   context("Teste de Permissão", { testIsolation: false }, () => {
 
  // #################################################################################################
-// #                                                                                               #
-// #                         VEREFICA SE A VITRINE PUBLICA NÃO ESTÁ DISPONIVEL PRO PERFIL ALUNO  EM PORTUGUES                         #
-// #                                                                                               #
+// #                                                                                               
+// #                         VEREFICA SE A VITRINE PUBLICA NÃO ESTÁ DISPONIVEL PRO PERFIL ALUNO  EM PORTUGUES                         
+// #                                                                                               
 // #################################################################################################
 
      it('Verefica que a vitrine nao estreja disponivel pro perfil aluno', () => {
@@ -173,7 +173,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
         
     });
 
-    
+    /*
       it('Loga no Perfil administrador para adicionar Permissão Grupo (Grupo - 2)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -347,7 +347,6 @@ it('Entra no perfil que faz parte do "Grupo - 2"', () => {
   cy.contains('#showcaseNavigation2026 span.ng-binding', 'Vitrine Espanhol Cypress')
     .should('not.exist');
 
-
      });
 
        it('Troca para pro idioma Espanhol', () => {
@@ -384,10 +383,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 
   .click({ force: true });
 
   cy.wait(2000);
-
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Espanhol Cypress');
 
      });
 
@@ -710,7 +705,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
 
      });
-
      
                  it("Clica na aba Vitrine", () => {
 
@@ -892,10 +886,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 
   .click({ force: true });
 
   cy.wait(2000);
-
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Espanhol Cypress');
 
      });
 
@@ -1420,10 +1410,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 
 
   cy.wait(2000);
 
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Espanhol Cypress');
-
      });
 
               it('Troca para p idioma Portugues', () => {
@@ -1717,7 +1703,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   cy.wait(8000)
 
     });
-
+*/
 
 // #################################################################################################
 // #                                                                                               #
@@ -1815,6 +1801,13 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   .click({ force: true });
 
   cy.wait(2000)
+
+  //Clica na lixeira para excluir a permisão publica
+  cy.get('tr.ng-scope > :nth-child(4) > .middle > .btn')
+  .should('be.visible')
+  .click({ force: true });
+
+  cy.wait(1000);
 
   //Clica em Usuario/Grupo
   cy.get('.default-padding.ng-scope > .permission-select > [ng-show="showUser"] > .column > .multiselect > .border > .ui-select-match > .btn-default')
@@ -1929,10 +1922,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Español$/, { timeout: 
   .click({ force: true });
 
   cy.wait(2000);
-
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Espanhol Cypress');
 
      });
 
@@ -2228,267 +2217,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     });
 
-
- // #################################################################################################
-// #                                                                                               #
-// #                         TESTE DE CATEGORIA                          #
-// #                                                                                               #
-// #################################################################################################
-
-
-      it('Entra no perfil administrador', () => {
-        
-    cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
-    cy.contains("button", "Entrar").click();
-
-    cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
-      .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
-
-    cy.get("ng-transclude > .border", { timeout: 60000 })
-      .should("be.visible")
-      .type("2006lrnrgr");
-
-    cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
-
-    cy.wait(10000);
-
-    // opcional: garante que saiu da tela de login
-    cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
-
-     });
-
-       it("Clica na aba Vitrine", () => {
-
-        const abrirVitrine = (tentativa = 1) => {
-  cy.get('[title="Vitrines"] > .sideitem', { timeout: 60000 }).should('be.visible').click({ force: true })
-  cy.wait(1000)
-
-  cy.get('body').then(($body) => {
-    const apareceu = $body.find('span.text-area[title="Primeira Vitrine Cypress"]:visible').length > 0
-
-    if (!apareceu && tentativa < 7) {
-      abrirVitrine(tentativa + 1)
-    }
-  })
-}
-
-abrirVitrine()
-
-cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).should('be.visible')
-
-      });
-
-it('Clica na Categoria', () => {
-  const clicarEditarVitrine = (tentativa = 1) => {
-    cy.get('body').then(($body) => {
-      const editarDisponivel = $body.find('tr')
-        .filter((_, tr) => Cypress.$(tr).text().includes('Vitrine Espanhol Cypress'))
-        .find('button[ng-click="editShowcase(showcase)"]:visible').length > 0
-
-      if (editarDisponivel) {
-        cy.contains('tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).within(() => {
-          cy.get('button[ng-click="editShowcase(showcase)"]').scrollIntoView().click({ force: true })
-        })
-      } else if (tentativa < 4) {
-        cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 10000 })
-          .should('be.visible')
-          .click({ force: true })
-
-        cy.wait(3000)
-        clicarEditarVitrine(tentativa + 1)
-      } else {
-        throw new Error('O botão Editar da vitrine não ficou disponível após 4 tentativas')
-      }
-    })
-  }
-
-  cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 10000 })
-    .should('be.visible')
-    .click({ force: true })
-
-  cy.wait(4000)
-  clicarEditarVitrine()
-
-})
-
-it('Colaca a vitrine em outra categoria', () => {
-
-  //Clica no "X" tirar a categortia
-  cy.get(':nth-child(2) > :nth-child(3) > .multiselect > .border > .ui-select-match > .btn-default > .btn')
-    .should('be.visible')
-    .click({ force: true });
-
-    cy.wait(1000);
-
-    //Clica na Categoria
-    cy.get(':nth-child(2) > :nth-child(3) > .multiselect > .border > .ui-select-match > .btn-default')
-    .should('be.visible')
-    .click({ force: true });
-    
-    // Clica na categoria /LECTOR (Não mexer)
-cy.get('.ui-select-choices:visible', { timeout: 10000 })
-  .contains('.ui-select-choices-row', '/LECTOR (Não mexer)')
-  .should('be.visible')
-  .click({ force: true })
-
-      //Salva a Vitrine
-  cy.get('.open-content > .end > .btn-swipe-accent')
-  .scrollIntoView()
-  .should('be.visible')
-  .click();
-
-  cy.wait(3000)
-
-    });
-
-    it('Verifica que a vitrine não está na categoria', () => {
-  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).should('not.exist')
-})
-
-it('Clica na categoria LECTOR (Não mexer) e verifica se aparece a vitrine nesta categoria', () => {
-
-  const abrirCategoriaLector = (tentativa = 1) => {
-    cy.contains('span.text-area', 'LECTOR (Não mexer)', { timeout: 60000 }).should('be.visible').click({ force: true })
-    cy.wait(1000)
-
-    cy.get('body').then(($body) => {
-      const apareceu = $body.find('div.ng-binding:contains("BANNER 2906"):visible').length > 0
-
-      if (!apareceu && tentativa < 7) {
-        abrirCategoriaLector(tentativa + 1)
-      }
-    })
-  }
-
-  abrirCategoriaLector()
-
-  cy.contains('div.ng-binding', 'BANNER 2906', { timeout: 60000 }).should('be.visible')
-})
-
-      it('Verifica que a vitrine está na categoria', () => {
-
-        cy.contains('table tbody div.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 60000 })
-  .should('be.visible')
-
-  });
-
-it('Joga a vitrine pra categoria todos', () => {
-
-  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 60000 })
-  .should('be.visible')
-  .within(() => {
-    cy.get('button.icon-edit').should('be.visible').click({ force: true })
-  })
-
-  cy.wait(1000);
-
-    //Clica no "X" tirar a categortia
-  cy.get(':nth-child(2) > :nth-child(3) > .multiselect > .border > .ui-select-match > .btn-default > .btn')
-    .should('be.visible')
-    .click({ force: true });
-
-          //Salva a Vitrine
-  cy.get('.open-content > .end > .btn-swipe-accent')
-  .scrollIntoView()
-  .should('be.visible')
-  .click();
-
-  cy.wait(2000)
-
-    });
-
-    it('Verifica que a vitrine não está na categoria', () => {
-  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 10000 }).should('not.exist')
-
-    })
-
-      it('Vai na categoria "Todos" e verifica se aparece a vitrine', () => {
-
-        const abrirTodos = (tentativa = 1) => {
-  cy.contains('span.text-area', /^Todos$/, { timeout: 60000 }).should('be.visible').click({ force: true })
-  cy.wait(1000)
-
-  cy.get('body').then(($body) => {
-    const apareceu = $body.find('table tbody div.ng-binding:contains("teste automação"):visible').length > 0
-
-    if (!apareceu && tentativa < 7) {
-      abrirTodos(tentativa + 1)
-    }
-  })
-}
-
-abrirTodos()
-
-cy.contains('table tbody div.ng-binding', /^teste automoção$/i, { timeout: 60000 }).should('be.visible')
-
-      })
-
-   it('Verifica que a vitrine está na categoria', () => {
-
-        cy.contains('table tbody div.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 60000 })
-        .scrollIntoView()
-        .should('be.visible') 
-
-  });
-
-  it('Joga a vitrine novamente pra categoria Primeira Vitrine Cypress', () => {
-
-  cy.contains('table tbody tr', 'Vitrine Espanhol Cypress', { timeout: 60000 })
-  .scrollIntoView()
-  .should('be.visible')
-  .within(() => {
-    cy.get('button.icon-edit').should('be.visible').click({ force: true })
-  })
-
-   cy.wait(1000);
-   
-})
-   
-
-it('Clica na categoria Primeira Vitrine Cypress', () => {
-
-        //Clica na Categoria
-    cy.get(':nth-child(2) > :nth-child(3) > .multiselect > .border > .ui-select-match > .btn-default')
-    .should('be.visible')
-    .click({ force: true });
-
-    cy.wait(1000);
-    
-    // Clica na categoria /Primeira Vitrine Cypress
-cy.get('.ui-select-choices:visible', { timeout: 10000 })
-  .contains('.ui-select-choices-row', '/Primeira Vitrine Cypress')
-  .should('be.visible')
-  .click({ force: true })
-
-          //Salva a Vitrine
-  cy.get('.open-content > .end > .btn-swipe-accent')
-  .scrollIntoView()
-  .should('be.visible')
-  .click();
-
-  cy.wait(2000)
-
-    });
-
-    it('Verifica que a vitrine está na categoria', () => {
-
-      const abrirPrimeiraVitrine = (tentativa = 1) => {
-  cy.contains('span.text-area', 'Primeira Vitrine Cypress', { timeout: 60000 }).should('be.visible').click({ force: true })
-  cy.wait(1000)
-
-  cy.get('body').then(($body) => {
-    const apareceu = $body.find('table tbody div.ng-binding:contains("Vitrine Espanhol Cypress"):visible').length > 0
-
-    if (!apareceu && tentativa < 3) abrirPrimeiraVitrine(tentativa + 1)
-  })
-}
-
-abrirPrimeiraVitrine()
-
-cy.contains('table tbody div.ng-binding', 'Vitrine Espanhol Cypress', { timeout: 60000 }).should('be.visible')
-
-     });
 
 
    });

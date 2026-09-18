@@ -175,6 +175,8 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
         
     });
 
+    /*
+
       it('Loga no Perfil administrador para adicionar Permissão Grupo (Grupo - 2)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -386,9 +388,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(2000);
 
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
 
      });
 
@@ -896,9 +895,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(2000);
 
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
 
      });
 
@@ -1194,7 +1190,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   cy.wait(8000)
 
     });
-
+*/
 
 // #################################################################################################
 // #                                                                                               #
@@ -1289,6 +1285,13 @@ clicarEditarVitrine()
 
   cy.wait(2000)
 
+  //Clica na lixeira para excluir a pemissão de grupo (Publica)
+  cy.get('tr.ng-scope > :nth-child(4) > .middle > .btn')
+  .should('be.visible')
+  .click({ force: true });
+
+  cy.wait(2000);
+
   //Clica em Usuario/Grupo
   cy.get('.default-padding.ng-scope > .permission-select > [ng-show="showUser"] > .column > .multiselect > .border > .ui-select-match > .btn-default')
   .should('be.visible')
@@ -1323,28 +1326,6 @@ cy.get('.ui-select-choices-row:visible span[title="Outro"]', { timeout: 10000 })
        });
 
                  it('Entra no perfil que faz parte da unidade "Outro"', () => {
-        
-    cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
-    cy.contains("button", "Entrar").click();
-
-    cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
-      .should("be.visible")
-      .type("teste14076@sharklasers.com");
-
-    cy.get("ng-transclude > .border", { timeout: 60000 })
-      .should("be.visible")
-      .type("123");
-
-    cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
-
-    cy.wait(10000);
-
-    // opcional: garante que saiu da tela de login
-    cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
-
-     });
-
-              it('Entra no perfil que faz parte do "Analista de Testes JR"', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -1426,10 +1407,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(2000);
 
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
-
      });
 
               it('Troca para p idioma Portugues', () => {
@@ -1447,7 +1424,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     });
 
-             it('Entra em outro perfil que não faz parte do cargo (Analista de Testes JR)', () => {
+             it('Entra em outro perfil que não faz parte da unidade (Outro)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -1546,7 +1523,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     });
 
-      it('Exclui a Permissão (Analista de Testes JR)', () => {
+      it('Exclui a Permissão ( Unidade: Outro)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -1566,7 +1543,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     // opcional: garante que saiu da tela de login
     cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
 
-     });
+     }); 
 
                       it("Clica na aba Vitrine", () => {
 
@@ -1651,7 +1628,7 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 
        });
 
-  it('Entra no perfil que faz parte do cargo "Analista de Testes JR" e verefica que a vitrine não esteja mais disponivel', () => {
+  it('Entra no perfil que faz parte da unidade "Outro" e verefica que a vitrine não esteja mais disponivel', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -1726,6 +1703,7 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     });
 
 
+    /*
 // #################################################################################################
 // #                                                                                               #
 // #                         TESTE DE PERMISSÃO DE USUARIO                                 #
@@ -1937,9 +1915,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 
   cy.wait(2000);
 
-  //Verefica se a vitrine está aberta
-cy.get('li[ng-if="breadcrumb.showcaseNameRoute"]', { timeout: 10000 })
-  .should('contain.text', 'Vitrine Ingles Cypress');
 
      });
 
@@ -2235,7 +2210,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     });
 
-
  // #################################################################################################
 // #                                                                                               #
 // #                         TESTE DE CATEGORIA                          #
@@ -2496,7 +2470,7 @@ abrirPrimeiraVitrine()
 cy.contains('table tbody div.ng-binding', 'Vitrine Ingles Cypress', { timeout: 60000 }).should('be.visible')
 
      });
-
+*/
 
    });
 

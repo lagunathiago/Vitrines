@@ -948,15 +948,51 @@ cy.get('.popup.popped')
 
   cy.wait(4000)
 
-    //Clica em editar
- cy.contains('tr', 'Primeira Vitrine Automação Cypress')
-  .within(() => {
-    cy.get('button[ng-click="editShowcase(showcase)"]')
-    .scrollIntoView()
-      .click({ force: true })
+ // Função para localizar e editar a vitrine
+function editarVitrine(tentativa = 1) {
+
+  cy.get('body').then(($body) => {
+
+    const vitrine = $body.find('tr')
+      .filter((i, tr) =>
+        tr.innerText.includes('Primeira Vitrine Automação Cypress')
+      );
+
+    if (vitrine.length > 0) {
+
+      // Encontrou a vitrine: clica em editar
+      cy.contains('tr', 'Primeira Vitrine Automação Cypress')
+        .within(() => {
+          cy.get('button[ng-click="editShowcase(showcase)"]')
+            .scrollIntoView()
+            .click({ force: true });
+        });
+
+    } else if (tentativa < 5) {
+
+      // Não encontrou: clica novamente na categoria
+      cy.get('span.text-area[title="Primeira Vitrine Cypress"]')
+        .click({ force: true });
+
+      cy.wait(2000);
+
+      // Tenta novamente
+      editarVitrine(tentativa + 1);
+
+    } else {
+
+      throw new Error('Vitrine não encontrada após 5 tentativas.');
+
+    }
+
   });
 
-    });
+}
+
+// Executa a função
+editarVitrine();
+
+});
 
     it('TROCA AS CORES DA VITRINE', () => {
 
