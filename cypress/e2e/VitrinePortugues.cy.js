@@ -996,7 +996,6 @@ cy.get('.popup.popped')
 
 })
 
-
  it('Edita a vitrine', () => {
 
       //Clica em editar no carrosel
