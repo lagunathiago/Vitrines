@@ -1,0 +1,93 @@
+
+name: Testes Automatizados - Vitrines
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cypress-tests:
+    name: Automacao Vitrines
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Configurar Cypress
+        run: npx cypress verify
+
+      - name: 01 - Criar Vitrine
+        run: npx cypress run --browser chrome --spec "cypress/e2e/CriarVitrine.cy.js"
+
+      - name: 02 - Proporcoes Banner
+        run: npx cypress run --browser chrome --spec "cypress/e2e/Proporçõesbanner.cy.js"
+
+      - name: 03 - Tipos de Cards
+        run: npx cypress run --browser chrome --spec "cypress/e2e/TiposdeCards.cy.js"
+
+      - name: 04 - Vitrine Portugues
+        run: npx cypress run --browser chrome --spec "cypress/e2e/VitrinePortugues.cy.js"
+
+      - name: 05 - Permissoes Portugues
+        run: npx cypress run --browser chrome --spec "cypress/e2e/PermissõesPortugues.cy.js"
+
+      - name: 06 - Vitrine Espanhol
+        run: npx cypress run --browser chrome --spec "cypress/e2e/VitrineEspanhol.cy.js"
+
+      - name: 07 - Permissoes Espanhol
+        run: npx cypress run --browser chrome --spec "cypress/e2e/PermissõesEspanhol.cy.js"
+
+      - name: 08 - Vitrine Ingles
+        run: npx cypress run --browser chrome --spec "cypress/e2e/VitrineIngles.cy.js"
+
+      - name: 09 - Permissoes Ingles
+        run: npx cypress run --browser chrome --spec "cypress/e2e/PermissõesIngles.cy.js"
+
+      - name: 10 - Permissao Treinamento
+        run: npx cypress run --browser chrome --spec "cypress/e2e/PermissãoTreinamento.cy.js"
+
+      - name: 11 - Permissao Trilha
+        run: npx cypress run --browser chrome --spec "cypress/e2e/PermissãoTrilha.cy.js"
+
+      - name: 12 - Teste de Categoria
+        run: npx cypress run --browser chrome --spec "cypress/e2e/TestedeCategoria.cy.js"
+
+      - name: Salvar screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Salvar videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
+          retention-days: 7
+
+    env:
+      CYPRESS_video: 'true'
+      CYPRESS_trashAssetsBeforeRuns: 'false'
+      CYPRESS_viewportWidth: '1920'
+      CYPRESS_viewportHeight: '1080'
