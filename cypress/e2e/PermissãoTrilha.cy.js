@@ -29,6 +29,8 @@ describe("Teste - Login", () => {
       .should("be.visible")
       .type("123");
 
+      cy.wait(10000);
+
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
     // opcional: garante que saiu da tela de login
@@ -38,8 +40,6 @@ describe("Teste - Login", () => {
 
   context("Criando Vitrine", { testIsolation: false }, () => {
   
-    
-    /*
 
     it("Clica na aba vitrine", () => {
 
@@ -252,7 +252,7 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'PÃ
   cy.wait(5000);
 
     });
-*/
+
       it('Clica em sair', () => {
 
         cy.wait(4000);

@@ -29,7 +29,7 @@ describe("Teste - Login", () => {
       .should("be.visible")
       .type("123");
 
-      cy.wait(7000);
+      cy.wait(10000);
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 

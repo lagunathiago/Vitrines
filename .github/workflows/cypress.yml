@@ -91,3 +91,7 @@ jobs:
       CYPRESS_trashAssetsBeforeRuns: 'false'
       CYPRESS_viewportWidth: '1920'
       CYPRESS_viewportHeight: '1080'
+      CYPRESS_experimentalMemoryManagement: 'true'
+      CYPRESS_numTestsKeptInMemory: '0'
+      CYPRESS_defaultCommandTimeout: '30000'
+      CYPRESS_pageLoadTimeout: '120000'

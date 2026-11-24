@@ -31,6 +31,8 @@ describe("Teste - Login", () => {
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
+    cy.wait(10000);
+
     // opcional: garante que saiu da tela de login
     cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
 
