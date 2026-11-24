@@ -181,11 +181,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -506,11 +506,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -691,11 +691,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1008,11 +1008,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1194,11 +1194,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1532,11 +1532,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1707,10 +1707,9 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
 // #################################################################################################
 // #                                                                                               #
-// #                         TESTE DE PERMISSÃO DE USUARIO                                 #
+// #                         TESTE DE PERMISSÃO DE USUARIO                                 
 // #                                                                                               #
 // #################################################################################################
-
 
 
  it('Adicina Permissão para o usuario teste14076@sharklasers.com', () => {
@@ -1720,11 +1719,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br"); 
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1734,7 +1733,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
     cy.url({ timeout: 60000 }).should("not.include", "/subscribe/login");
 
      });
-
             it("Clica na aba Vitrine", () => {
 
         const abrirVitrine = (tentativa = 1) => {
@@ -2046,11 +2044,11 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -2144,7 +2142,7 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 
        });
 
-  it('Entra no perfil adiciondo anteriormente e verifica que a vitrinenao esteja mais diponivel', () => {
+  it('Entra no perfil adiciondo anteriormente e verifica que a vitrine nao esteja mais diponivel', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -2216,8 +2214,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
   cy.wait(8000)
 
     });
-
-
 
    });
 

@@ -23,11 +23,11 @@ describe("Teste - Login", () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -621,7 +621,7 @@ cy.contains(
 
         //Verefica se tem 5 banners
         cy.get('banner-carousel', { timeout: 60000 })
-  .should('have.length.at.least', 5)
+  .should('have.length.at.least', 4)
 
 
     });

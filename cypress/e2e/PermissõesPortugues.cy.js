@@ -68,7 +68,7 @@ describe("Teste - Login", () => {
 
      });
 
-      // #################################################################################################
+// #################################################################################################
 // #                                                                                               #
 // #                         TESTE DE PERMISSÃO DE CARGO (GRUPO- 2)                                #
 // #                                                                                               #
@@ -82,11 +82,11 @@ describe("Teste - Login", () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -304,11 +304,11 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'Gr
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -451,22 +451,22 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
 
 // #################################################################################################
 // #                                                                                               #
-// #                         TESTE DE PERMISSÃO DE CARGO (ANALISTA DE TESTES JR)                                  #
+// #                         TESTE DE PERMISSÃO DE CARGO (Analista SR)                                  #
 // #                                                                                               #
 // #################################################################################################
     
-      it('Adicina Permissão Cargo (Analista de Testes JR)', () => {
+      it('Adicina Permissão Cargo (Analista SR)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -549,13 +549,13 @@ cy.get('span.text-area[title="Primeira Vitrine Cypress"]', { timeout: 60000 }).s
   .should('be.visible')
   .click({ force: true });
 
-// Digita Analista de Testes JR
+// Digita Analista SR
 cy.get('.permission-select input.ui-select-search:visible', { timeout: 10000 })
   .first()
-  .type('Analista de Testes JR', { force: true });
+  .type('Analista SR', { force: true });
 
-// Seleciona a opção Analista de Testes JR
-cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'Analista de Testes JR', { timeout: 10000 })
+// Seleciona a opção Analista SR
+cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'Analista SR', { timeout: 10000 })
   .should('be.visible')
   .click({ force: true });
 
@@ -576,7 +576,7 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'An
    
        });
 
-         it('Entra no perfil que faz parte do "Analista de Testes JR"', () => {
+         it('Entra no perfil que faz parte do "Analista SR"', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -625,7 +625,7 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'An
 
      });
 
-         it('Entra em outro perfil que não faz parte do cargo (Analista de Testes JR)', () => {
+         it('Entra em outro perfil que não faz parte do cargo (Analista SR)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -671,18 +671,18 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'An
 
     });
 
-     it('Exclui a Permissão (Analista de Testes JR)', () => {
+     it('Exclui a Permissão (Analista SR)', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -760,7 +760,7 @@ it('Clica na vitrine', () => {
 
   cy.wait(2000)
 
-  //Clica na lixeira para excluir a pemissão de grupo (Analista de Testes JR)
+  //Clica na lixeira para excluir a pemissão de grupo Analista SR) 
   cy.get('tr.ng-scope > :nth-child(4) > .middle > .btn')
   .should('be.visible')
   .click({ force: true });
@@ -776,7 +776,7 @@ it('Clica na vitrine', () => {
 
        });
 
-         it('Entra no perfil que faz parte do cargo "Analista de Testes JR" e verefica que a vitrine não esteja mais disponivel', () => {
+         it('Entra no perfil que faz parte do cargo "Analista SR" e verefica que a vitrine não esteja mais disponivel', () => {
         
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
     cy.contains("button", "Entrar").click();
@@ -837,11 +837,11 @@ it('Clica na vitrine', () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1053,11 +1053,11 @@ cy.get('.ui-select-choices-row:visible span[title="Outro"]', { timeout: 10000 })
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1212,11 +1212,11 @@ it('Clica na vitrine', () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1413,11 +1413,11 @@ cy.get('.ui-select-choices-row:visible span[title="Aluno"]', { timeout: 10000 })
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -1571,11 +1571,11 @@ it('Clica na vitrine', () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 

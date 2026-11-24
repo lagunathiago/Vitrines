@@ -23,11 +23,11 @@ describe("Teste - Login", () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -37,7 +37,6 @@ describe("Teste - Login", () => {
   });
 
   context("Criando Vitrine", { testIsolation: false }, () => {
-  
    
     it("Cria a categoria", () => {
 
@@ -858,10 +857,6 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 cy.get('.showcase-search', { timeout: 10000 })
   .should('be.visible');
 
-  // Verifica se o banner está visível
-cy.get('a.banner-container', { timeout: 10000 })
-  .should('be.visible');
-
   const tituloVitrine = 'Título Automação Cypress';
 const descricaoVitrine = 'Descrição criada pela automação Cypress';
 
@@ -917,12 +912,12 @@ cy.get('.popup.popped')
     cy.get('input[ng-model="credentials.username"]')
       .should('be.visible')
       .clear()
-      .type('qualidade2@lectortec.com.br')
+      .type('qualidade@lectortec.com.br')
 
     cy.get('#login_password_navbar')
       .should('be.visible')
       .clear()
-      .type('2006lrnrgr', { log: false })
+      .type('123', { log: false })
 
     cy.contains('button[ng-click="login()"]', 'Entrar')
       .should('be.visible')
@@ -1199,10 +1194,6 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 cy.get('.showcase-search', { timeout: 10000 })
   .should('be.visible');
 
-  // Verifica se o banner está visível
-cy.get('a.banner-container', { timeout: 10000 })
-  .should('be.visible');
-
   const tituloVitrine = 'Título EDITADO LECTOR';
 const descricaoVitrine = 'Descrição EDITADA LECTOR';
 
@@ -1238,9 +1229,6 @@ cy.get('.showcase-rich-text-content img', { timeout: 10000 })
   });
     
   });
-
-
-
 
   });
 

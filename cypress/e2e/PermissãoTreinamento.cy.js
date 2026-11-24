@@ -23,11 +23,11 @@ describe("Teste - Login", () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -38,7 +38,7 @@ describe("Teste - Login", () => {
 
   context("Criando Vitrine", { testIsolation: false }, () => {
   
-    /*
+    
     it("Clica na aba vitrine", () => {
 
 const abrirVitrinesAteCategoriaAparecer = (tentativa = 1) => {
@@ -261,7 +261,8 @@ cy.contains('.ui-select-choices-row-inner, .ui-select-choices-row, li, div', 'P�
   cy.wait(5000);
 
     });
-*/
+
+
       it('Clica em sair', () => {
 
         cy.wait(4000);
@@ -287,6 +288,7 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 // #                         VEREFICA A TURMA ESTÁ DISPONIVEL PARA O PUBLICA NO TREINAMENTO AUTOMAÇÃO PERMISSÃO PUBLICA                     
 // #                                                                                               
 // #################################################################################################
+
 
      it('Vai até a vitrine', () => {
         cy.wait(7000);
@@ -499,9 +501,7 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
   cy.contains('.txt-bold', 'PAGO', { timeout: 10000 })
     .should('not.exist');
 
-
  });
-
 
 // #################################################################################################
 // #                                                                                                     
@@ -510,7 +510,6 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 // #################################################################################################
 
 
- 
   it('Loga no perfil Grupo - 2', () => {
 
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -622,7 +621,6 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
   cy.contains('.txt-bold', 'PAGO', { timeout: 10000 })
     .should('not.exist');
 
-  
  });
       
 // #################################################################################################
@@ -631,6 +629,7 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 // #                                                                                               
 // #################################################################################################
 
+
  it('Loga no perfil unidade OUTRO', () => {
 
     cy.visit("https://hml.lector.live/lector_suporte/subscribe/login");
@@ -638,7 +637,7 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("15094@sharklasers.com");
+      .type("09012tes@sharklasers.com");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
@@ -674,10 +673,10 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 
      });
 
-      it('Vai até o treinamento com permissão GRUPO - 2', () => {
+      it('Vai até o treinamento com permissão Outro', () => {
 
-        //Clica no Treinamento TREINAMENTO AUTOMAÇÃO PERMISSÃO grupo - 2
-        cy.get(':nth-child(3) > .card-container > [ng-init="course = content.entity"] > a.ng-scope > .showcase-card-container', { timeout: 10000 })
+        //Clica no Treinamento TREINAMENTO AUTOMAÇÃO PERMISSÃO Outro
+        cy.get(':nth-child(4) > .card-container > [ng-init="course = content.entity"] > a.ng-scope > .showcase-card-container', { timeout: 10000 })
         .should('be.visible')
         .click({ force: true });
 
@@ -685,7 +684,7 @@ cy.contains('#user-options.options.show div.ml-10', 'Sair', { timeout: 10000 })
 
         it('Verifica as turmas PAGAS E GRATUITAS', () => {
 
-  cy.contains('.txt-bold', 'GRATIS', { timeout: 10000 })
+  cy.contains('.txt-bold', 'GRATUITO', { timeout: 10000 })
     .should('be.visible');
 
   cy.contains('.txt-bold', 'PAGO', { timeout: 10000 })

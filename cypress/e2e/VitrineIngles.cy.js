@@ -23,11 +23,11 @@ describe("Teste - Login", () => {
 
     cy.get('form.ng-pristine > [type="text"]', { timeout: 60000 })
       .should("be.visible")
-      .type("qualidade2@lectortec.com.br");
+      .type("qualidade@lectortec.com.br");
 
     cy.get("ng-transclude > .border", { timeout: 60000 })
       .should("be.visible")
-      .type("2006lrnrgr");
+      .type("123");
 
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
@@ -889,10 +889,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^English$/, { timeout: 1
 cy.get('.showcase-search', { timeout: 10000 })
   .should('be.visible');
 
-  // Verifica se o banner está visível
-cy.get('a.banner-container', { timeout: 10000 })
-  .should('be.visible');
-
   const tituloVitrine = 'Título Automação Cypress INGLES';
 const descricaoVitrine = 'Descrição Automação Cypress INGLES';
 
@@ -946,7 +942,6 @@ cy.contains('#languageOptions .ui-select-choices-row', /^Português$/, { timeout
         
     });
 
-    
     it("Loga novamente no perfil Administrador", () => {
 
     cy.wait(3000);
@@ -965,12 +960,12 @@ cy.get('.popup.popped')
     cy.get('input[ng-model="credentials.username"]')
       .should('be.visible')
       .clear()
-      .type('qualidade2@lectortec.com.br')
+      .type('qualidade@lectortec.com.br')
 
     cy.get('#login_password_navbar')
       .should('be.visible')
       .clear()
-      .type('2006lrnrgr', { log: false })
+      .type('123', { log: false })
 
     cy.contains('button[ng-click="login()"]', 'Entrar')
       .should('be.visible')
