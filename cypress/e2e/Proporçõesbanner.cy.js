@@ -29,6 +29,8 @@ describe("Teste - Login", () => {
       .should("be.visible")
       .type("123");
 
+      cy.wait(7000);
+
     cy.get("#btn-entrar", { timeout: 60000 }).should("be.visible").click();
 
     // opcional: garante que saiu da tela de login
